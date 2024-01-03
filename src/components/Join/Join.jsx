@@ -2,7 +2,7 @@ import React from 'react'
 import './Join.css';
 import logo from './../../images/logo.png';
 import { Link } from 'react-router-dom';
-import Chat from '../Chat/Chat';
+
 
 let user;
   
@@ -18,7 +18,7 @@ const Join = () => {
     <div className='JoinPage'>
         <div className='JoinContainer'>
             <h1>Chit Chat</h1>
-            <img src={logo} alt='logo image'></img>
+            <img src={logo} ></img>
             <input type="text" placeholder='Enter Your name' id='inputfield'/>
             <Link to='/chat'><button onClick={setUser} type='submit' className='button'>Login</button></Link>
             

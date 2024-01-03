@@ -21,30 +21,29 @@ const Chat = () => {
     document.getElementById('chatInput').value = '';
   }
 
-  useEffect(()=>{
-    socket = socketIo(ENDPOINT, { transports: ['websocket']});
-    socket.on('connect', ()=> {
-        setId(socket.id);
-    socket.emit('joined', {user});
-    socket.on('userjoined', (data)=>{
-      setMsg([...msg, data]);
-    })
-    socket.on('welcome', (data)=>{
-      setMsg([...msg, data]);
-    })
-    socket.on('leave', (data)=>{
-      setMsg([...msg, data]);
-    })
-    
-    })
-
-    return ()=>{
-      socket.on('disconnect',()=>{
+  useEffect(() => {
+    socket = socketIo(ENDPOINT, { transports: ['websocket'] });
+    socket.on('connect', () => {
+      setId(socket.id);
+      socket.emit('joined', { user });
+      socket.on('userjoined', (data) => {
+        setMsg((prevMsg) => [...prevMsg, data]);
+      });
+      socket.on('welcome', (data) => {
+        setMsg((prevMsg) => [...prevMsg, data]);
+      });
+      socket.on('leave', (data) => {
+        setMsg((prevMsg) => [...prevMsg, data]);
+      });
+    });
+  
+    return () => {
+      socket.on('disconnect', () => {
         socket.off();
       });
-      
-    }
-  }, [])
+    };
+  }, []);
+  
 
   useEffect(()=>{
     socket.on('sharemsg', (data)=>{
